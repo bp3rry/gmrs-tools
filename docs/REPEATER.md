@@ -123,7 +123,7 @@ Two candidate sites. Either works; **start with the tree, move to the shop** onc
 |---|---|---|
 | Antenna height | ~20 ft | ~22–25 ft (10 ft mast on gable-end wall brackets) |
 | Antenna | Vertical dipole / roll-up J-pole hung from a rope + pulley | Comet CA-GMRS on 1.5" steel mast |
-| Cost | Low (~$30–80 antenna + rope) | ~$340–530 for antenna, mount, coax and grounding (§4.1) |
+| Cost | Low (~$30–80 antenna + rope) | ~$400–670 for antenna, plated wall mount, coax and grounding (§4.1) |
 | Effort | An afternoon | A weekend; ladder/roof work |
 | Durability | Wind sway, branches, re-hoisting | Permanent |
 | Best for | Bench-to-field testing, first coverage check | Long-term station |
@@ -149,7 +149,7 @@ Side view of the gable end of the 30×40 metal shop:
         roof peak    │
           ~15 ft  /\ │
                  /  \╞══╗  UPPER bracket — high on the gable,
-                /    \  ║  bolted into framing (not just sheet metal)
+                /    \  ║  through-bolted with inside backing plate
                /      \ ║
               /        \║◄── 18" standoff clears roof overhang/trim
              /          ║    and keeps the antenna off the metal wall
@@ -157,9 +157,9 @@ Side view of the gable end of the 30×40 metal shop:
            /            ║
    eave ──/─────────── ╞╝  LOWER bracket (+ brace leg) near the eave
          │              │
-         │   metal wall │ ◄── butyl/EPDM sealing washers on every bolt
-         │   (girts     │
-         │   behind)    │       drip loop
+         │ heavy-gauge  │ ◄── butyl/EPDM sealing washers on every bolt
+         │ steel wall   │
+         │ panels       │       drip loop
          │              │        ╭─╮
          │       ┌──────┴──◄─────╯ │   coax enters wall below the loop
          │       │ ARRESTOR├───────┘
@@ -173,10 +173,38 @@ Side view of the gable end of the 30×40 metal shop:
 ```
 
 **How it's built**
-- **Bolt into the framing, never just the siding.** Find the horizontal girts behind the panels.
-  - *Wood girts* (typical pole barn): ⅜" lag bolts into the girts.
-  - *Steel girts:* through-bolt with a backing plate, or self-drilling structural screws rated for the steel thickness.
-- **Spread the brackets as far apart vertically as possible:** lower one near the eave, upper one high on the gable. Less mast above the top bracket handles wind better. If the antenna would sit more than ~5 ft above the top bracket, use a heavier mast.
+
+The shop is heavy-gauge steel, and fastening into the internal beams isn't practical. Each bracket is therefore **through-bolted through the wall panel and clamped between an outside plate and an inside backing plate**. The plates spread the load across several ribs so it never rests on one small patch of sheet steel.
+
+Bracket attachment detail (cross-section through the wall, one bracket):
+
+```
+      OUTSIDE                         │ │                        INSIDE
+                                      │ │
+   bracket foot ──► ┌──────┐ ┌────────┤ ├────────┐
+                    │      │ │ outside│ │ inside │ ◄── backing plate, 3/16"–1/4" steel,
+   mast ◄═══════════╡      ├─┤ plate  │ │ plate  │     wide enough to span 2–3 panel ribs
+   (18" standoff)   │      │ │        │ │        │     (e.g. ~12" × 18")
+                    └──────┘ └────────┤ ├────────┘
+                                      │ │
+   bolt: 3/8" galvanized grade 5 ═════╪═╪═════════ flat washer + lock nut
+   (4 per bracket minimum)            │ │
+       EPDM-bonded washer + butyl ───►│ │◄── steel spacer blocks fill rib/valley gaps
+       tape under the outside plate   │ │    so tightening doesn't crush the ribs
+                                      │ │
+                               steel wall panel
+```
+
+- **Plates:** use an outside plate under each bracket and an inside backing plate behind it, both 3/16"–1/4" steel, sized to span at least 2–3 panel ribs. A welding or fab shop can cut and drill matching pairs cheaply.
+- **Bolts:** at least 4 per bracket, 3/8" **hot-dip galvanized** grade 5, with lock nuts. Galvanized steel matches the panels and avoids the corrosion you can get when stainless touches galvanized. If you use stainless, put nylon or EPDM washers between the dissimilar metals.
+- **Ribs:** if the panel is ribbed, fill the gaps behind the plates with steel spacer blocks so the plates sit flat and tightening doesn't crush the ribs.
+- **Sealing:** lay butyl tape under the outside plate, put an EPDM-bonded washer on each bolt head, and seal the bolt holes.
+- **Holes:** mark the outside plate's hole pattern from the inside backing plate so the two line up. The plates make the Rohn WM18D's wood-stud hole spacing irrelevant, because you drill whatever pattern the plates need.
+- **Spacing:** spread the brackets as far apart vertically as possible, the lower one near the eave and the upper one high on the gable. The wider apart they are, the smaller the wind forces on each bracket. If the antenna would sit more than ~5 ft above the top bracket, use a heavier mast.
+
+**Option: ground-supported mast (recommended if the panel feels thin when you drill it)**
+
+Stand the mast on the ground, on a base plate on a small concrete pad or a pipe set in concrete, and use the two wall brackets only to hold it upright. The ground then carries the weight and most of the wind load, and the wall panels only resist side sway. You need a longer mast for this: two 10 ft sections joined, or a telescoping mast, about 25–30 ft from ground to antenna base.
 - **18" standoff brackets** clear the overhang and keep the antenna away from the metal wall, which can distort its pattern.
 - **Coax runs down the mast,** strapped every ~2 ft, with a drip loop before it enters the wall.
 - **Arrestor at the wall entry**, bonded with the mast to one ground rod, which is bonded to the electrical service ground.
@@ -192,8 +220,11 @@ Side view of the gable end of the 30×40 metal shop:
 | Main coax | LMR-400 or equivalent, **PL-259 both ends**, measured run + ~10% | est. $70–120 (50 ft) | CA-GMRS and RT97S both have SO-239 sockets. Over ~75 ft → ½" hardline. |
 | Protection | UHF arrestor, 3 ft jumper, ground rod, #6 copper, clamps | est. $80–160 | |
 | Sealing | Self-amalgamating tape, butyl/EPDM washers, UV zip ties | est. $15 | |
+| Mounting plates | 2 pairs (inside + outside) of 3/16"–1/4" steel plates, ~12" × 18", drilled to match; steel rib spacers | est. $40–100 (fab shop) | One pair per bracket. |
+| Bolts | 3/8" hot-dip galvanized grade 5 bolts, flat washers, lock nuts, EPDM-bonded washers, butyl tape | est. $20–40 | At least 4 per bracket. |
+| *Optional* ground base | Mast base plate on a concrete pad, or a pipe set in concrete; extra 10 ft mast section | est. $50–120 | For the ground-supported option. |
 
-**Mount subtotal: ~$340–530.**
+**Mount subtotal: ~$400–670** with plates and bolts (add the optional ground base if used).
 
 ### Height rules
 Check the GMRS antenna-height rule in 47 CFR Part 95E and any FAA / local / HOA limits before going much higher than the shop mast. Both options above are modest heights.
@@ -256,7 +287,8 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 ---
 
 ## 7. Open questions
-- Shop wall girts: wood or steel? (Decides lag bolts vs through-bolts/structural screws.)
+- Shop wall panel gauge and rib profile (sets backing-plate size and spacer blocks). Decision so far: through-bolt with backing plates, not into internal beams.
+- Wall-only mount or ground-supported mast?
 - Coax run length from the gable end to the repeater's spot inside (sets cable length and type).
 - Does the Comet CA-GMRS mount clamp fit a 1.5" OD mast?
 - Does the RT97L's DB-9 port support an external controller? (Decides the upgrade path.)
