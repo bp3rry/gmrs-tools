@@ -24,7 +24,7 @@ Out of scope for now: internet linking (GMRS restricts network interconnection; 
 | Controller interface | **DMK URIxB** (~$120) + RT97S-to-URIxB cable | USB sound card with PTT output and COS (carrier detect) input. |
 | Controller computer | Existing Mac mini or Linux PC, **running Debian** | Headless, auto-restart services, no macOS sleep/update surprises. |
 | Antenna (initial) | Vertical UHF dipole or J-pole hoisted in a tree | Cheap, quick, ~20 ft. See §4. |
-| Antenna (permanent) | **Comet CA-GMRS** on a 10 ft mast, gable-end wall mount on the shop | Factory-tuned for 462–468 MHz, no adjustment needed. See §4.1. |
+| Antenna (permanent) | **Comet CA-GMRS** on a ground-supported 1-1/4" steel pipe mast at the shop gable end, antenna tip ~25 ft | Factory-tuned for 462–468 MHz, no adjustment needed. See §4.1. |
 
 Upgrade path: **RT97L** (~$535, ~20 W measured vs ~4 W) if coverage is too small — but confirm its DB-9 port supports a controller first.
 
@@ -37,7 +37,7 @@ Upgrade path: **RT97L** (~$535, ~20 W measured vs ~4 W) if coverage is too small
 ```
                  ┌─────────────────────┐
                  │   ANTENNA           │   tree dipole (~20 ft)  — or —
-                 │   (vertical, UHF)   │   Comet CA-GMRS, shop wall mast (~22–25 ft)
+                 │   (vertical, UHF)   │   Comet CA-GMRS, shop ground-supported mast (~25 ft)
                  └──────────┬──────────┘
                             │  LMR-400 coax (drip loop before entry)
                             │
@@ -121,10 +121,10 @@ Two candidate sites. Either works; **start with the tree, move to the shop** onc
 
 | | A. Tree at garage corner | B. Shop (30×40, ~15 ft peak) |
 |---|---|---|
-| Antenna height | ~20 ft | ~22–25 ft (10 ft mast on gable-end wall brackets) |
-| Antenna | Vertical dipole / roll-up J-pole hung from a rope + pulley | Comet CA-GMRS on 1.5" steel mast |
-| Cost | Low (~$30–80 antenna + rope) | ~$400–670 for antenna, plated wall mount, coax and grounding (§4.1) |
-| Effort | An afternoon | A weekend; ladder/roof work |
+| Antenna height | ~20 ft | **~25 ft at the antenna tip** (about 10 ft above the peak) |
+| Antenna | Vertical dipole / roll-up J-pole hung from a rope + pulley | Comet CA-GMRS on a ground-supported steel pipe mast |
+| Cost | Low (~$30–80 antenna + rope) | ~$470–830 for antenna, mast, base, brackets, coax and grounding (§4.1) |
+| Effort | An afternoon | A weekend: concrete pad, then mast raising (2–3 people) |
 | Durability | Wind sway, branches, re-hoisting | Permanent |
 | Best for | Bench-to-field testing, first coverage check | Long-term station |
 
@@ -134,47 +134,87 @@ Two candidate sites. Either works; **start with the tree, move to the shop** onc
 - **Use a halyard (rope + pulley)** so you can lower it without climbing. Leave slack for sway so the coax isn't tugged.
 - **Measure the coax run** from the antenna to where the repeater will sit. At 462 MHz, 50 ft of LMR-400 loses about 1.4 dB; the same length of RG-58 loses roughly 5 dB (most of your signal).
 
-### 4.1 Shop gable-end wall mount (recommended permanent site)
+### 4.1 Shop: ground-supported mast (chosen permanent site)
 
-Side view of the gable end of the 30×40 metal shop:
+**Decision:** the mast stands on its own concrete base at ground level. Two wall brackets on the gable end only hold it upright. The ground carries the weight and most of the wind load, so the steel wall panels only resist side sway.
+
+**Target geometry**
+
+| Point | Height above ground |
+|---|---|
+| Mast base (on concrete pad) | 0 ft |
+| Lower wall bracket | ~7 ft |
+| Upper wall bracket (just below the peak) | ~14 ft |
+| Roof peak | ~15 ft |
+| Mast top / antenna base | 25 ft **minus the antenna's length** (≈21 ft for an antenna of ~4 ft) |
+| Antenna tip | **~25 ft** (about 10 ft above the peak) |
+
+Front view of the gable end, mast centered at the peak:
 
 ```
-                    ┌┐
-                    ││  Comet CA-GMRS antenna
-                    ││  (keep within ~5 ft of the top bracket)
-                    └┤
-                     │
-                     │  10 ft galvanized steel mast, 1.5" OD, 16-ga or heavier
-                     │◄─── coax strapped down the mast every ~2 ft
-        roof peak    │
-          ~15 ft  /\ │
-                 /  \╞══╗  UPPER bracket — high on the gable,
-                /    \  ║  through-bolted with inside backing plate
-               /      \ ║
-              /        \║◄── 18" standoff clears roof overhang/trim
-             /          ║    and keeps the antenna off the metal wall
-            /           ║
-           /            ║
-   eave ──/─────────── ╞╝  LOWER bracket (+ brace leg) near the eave
-         │              │
-         │ heavy-gauge  │ ◄── butyl/EPDM sealing washers on every bolt
-         │ steel wall   │
-         │ panels       │       drip loop
-         │              │        ╭─╮
-         │       ┌──────┴──◄─────╯ │   coax enters wall below the loop
-         │       │ ARRESTOR├───────┘
-         │       └────┬────┘
-         │  inside    │ #6 copper ───► GROUND ROD (8–10 ft) ◄─── mast bonded here too
-         │            │ 3 ft jumper
-         │       ┌────▼─────┐
-         │       │  RT97S   │  + power supply, controller PC
-         │       └──────────┘
-   ──────┴──────────────────────────── ground
+                              ┌┐  ◄── antenna tip ≈ 25 ft
+                              ││
+                              ││  Comet CA-GMRS antenna
+                              ││
+                              └┤  ◄── mast top ≈ 21 ft  (25 ft − antenna length)
+                               │
+                               │  1-1/4" schedule 40 galvanized steel pipe
+                               │  (1.66" OD), one 21 ft stick, no joints
+                               │◄── coax strapped to the mast every ~2 ft
+                               │
+                    peak ~15 ft│
+                             /\│
+                            /  ╞═══  UPPER bracket ~14 ft (steadies the mast only)
+                           /   │  \
+                          /    │   \
+                         /     │    \
+                        /      │     \
+                       /       │      \
+                      /        │       \
+                     /         ╞═══     \   LOWER bracket ~7 ft
+                    /          │         \
+          eave ────┤           │          ├──── eave
+                   │           │          │
+                   │  gable    │          │   heavy-gauge steel wall panels;
+                   │  end wall │          │   brackets through-bolted with
+                   │           │          │   inside backing plates (detail below)
+                   │           │          │
+                   │           │ drip loop│
+                   │       ╭───┤          │
+                   │  ┌────┴─┐ │          │
+   inside: RT97S ◄─┼──┤ARRST.│ │          │
+   power, PC       │  └──┬───┘ │          │
+                   │     │     │          │
+   ════════════════╧═════╪═════╪══════════╧════════ ground
+                         │  ┌──┴──┐
+             #6 copper ──┴──┤ PAD ├──► GROUND ROD (8–10 ft), mast base and
+                            └─────┘    arrestor bonded to it, and to service ground
+                  concrete pad with base plate
 ```
 
-**How it's built**
+**Mast**
+- **Use steel pipe, not TV mast.** 1-1/4" schedule 40 galvanized pipe (1.66" OD) is much stiffer than thin-wall swaged mast, which matters with ~7 ft of mast plus the antenna above the top bracket.
+- **Pipe comes in 21 ft sticks**, which matches the ≈21 ft mast-top target, so there's no joint. Cut it to **25 ft minus the antenna's length** once you know the CA-GMRS's actual length. Supply houses can cut it to length. Plan a trailer or a long truck bed to haul it.
+- **If it flexes too much in wind**, step up to 1-1/2" schedule 40 (1.90" OD) with Rohn WM18D brackets. The EZ30-18 brackets top out at 1.75".
 
-The shop is heavy-gauge steel, and fastening into the internal beams isn't practical. Each bracket is therefore **through-bolted through the wall panel and clamped between an outside plate and an inside backing plate**. The plates spread the load across several ribs so it never rests on one small patch of sheet steel.
+**Base**
+- Pour a small concrete pad, about 2 ft × 2 ft × 2 ft deep or deeper below your frost line, with anchor bolts for a **mast base plate**, or set a short pipe sleeve in it.
+- Put the base **about 18" out from the wall**, so the mast lines up with the bracket standoff and stands plumb.
+- Put the ground rod next to the pad and bond the mast base to it.
+
+**Wall brackets (steadying only)**
+- **Brackets:** two [Easy Up EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) brackets, 18" standoff, fit 1"–1.75" mast. The 1.66" pipe is near their upper limit, so check the U-bolt fit.
+- **Placement:** set the lower one at ~7 ft and the upper one just below the peak at ~14 ft, on the centerline of the gable end.
+- **Fastening:** still through-bolt with backing plates (detail below). The loads are smaller now, so ~8" × 12" plates are enough.
+
+**Raising it**
+- Stand the mast with 2–3 people and the antenna and coax already attached, then clamp it into the brackets from a ladder.
+- Plan raising it as if it could fall, and keep it well clear of power lines.
+
+**Coax and protection**
+- Run the coax down the mast, strapped every ~2 ft, with a drip loop just before it enters the wall.
+- Put the arrestor at the wall entry, and bond it and the mast to the same ground rod. That rod is in turn bonded to the electrical service ground; have an electrician check this.
+- The shop is also a good home for the repeater, power and controller PC: short coax run and one grounding point.
 
 Bracket attachment detail (cross-section through the wall, one bracket):
 
@@ -183,8 +223,8 @@ Bracket attachment detail (cross-section through the wall, one bracket):
                                       │ │
    bracket foot ──► ┌──────┐ ┌────────┤ ├────────┐
                     │      │ │ outside│ │ inside │ ◄── backing plate, 3/16"–1/4" steel,
-   mast ◄═══════════╡      ├─┤ plate  │ │ plate  │     wide enough to span 2–3 panel ribs
-   (18" standoff)   │      │ │        │ │        │     (e.g. ~12" × 18")
+   mast ◄═══════════╡      ├─┤ plate  │ │ plate  │     spanning 2–3 panel ribs
+   (18" standoff)   │      │ │        │ │        │     (~8" × 12" for a steadying bracket)
                     └──────┘ └────────┤ ├────────┘
                                       │ │
    bolt: 3/8" galvanized grade 5 ═════╪═╪═════════ flat washer + lock nut
@@ -195,36 +235,26 @@ Bracket attachment detail (cross-section through the wall, one bracket):
                                steel wall panel
 ```
 
-- **Plates:** use an outside plate under each bracket and an inside backing plate behind it, both 3/16"–1/4" steel, sized to span at least 2–3 panel ribs. A welding or fab shop can cut and drill matching pairs cheaply.
-- **Bolts:** at least 4 per bracket, 3/8" **hot-dip galvanized** grade 5, with lock nuts. Galvanized steel matches the panels and avoids the corrosion you can get when stainless touches galvanized. If you use stainless, put nylon or EPDM washers between the dissimilar metals.
-- **Ribs:** if the panel is ribbed, fill the gaps behind the plates with steel spacer blocks so the plates sit flat and tightening doesn't crush the ribs.
-- **Sealing:** lay butyl tape under the outside plate, put an EPDM-bonded washer on each bolt head, and seal the bolt holes.
-- **Holes:** mark the outside plate's hole pattern from the inside backing plate so the two line up. The plates make the Rohn WM18D's wood-stud hole spacing irrelevant, because you drill whatever pattern the plates need.
-- **Spacing:** spread the brackets as far apart vertically as possible, the lower one near the eave and the upper one high on the gable. The wider apart they are, the smaller the wind forces on each bracket. If the antenna would sit more than ~5 ft above the top bracket, use a heavier mast.
-
-**Option: ground-supported mast (recommended if the panel feels thin when you drill it)**
-
-Stand the mast on the ground, on a base plate on a small concrete pad or a pipe set in concrete, and use the two wall brackets only to hold it upright. The ground then carries the weight and most of the wind load, and the wall panels only resist side sway. You need a longer mast for this: two 10 ft sections joined, or a telescoping mast, about 25–30 ft from ground to antenna base.
-- **18" standoff brackets** clear the overhang and keep the antenna away from the metal wall, which can distort its pattern.
-- **Coax runs down the mast,** strapped every ~2 ft, with a drip loop before it enters the wall.
-- **Arrestor at the wall entry**, bonded with the mast to one ground rod, which is bonded to the electrical service ground.
-- The shop is also a good home for the repeater, power and controller PC: short coax run and one grounding point.
+- **Bolts:** 3/8" **hot-dip galvanized** grade 5 with lock nuts, at least 4 per bracket. Galvanized matches the panels; if you use stainless, isolate it with nylon or EPDM washers.
+- **Ribs:** fill the gaps behind the plates with steel spacers so the plates sit flat.
+- **Sealing:** butyl tape under the outside plate, an EPDM-bonded washer on each bolt, and seal the holes.
+- **Holes:** drill the inside and outside plates as a matched pair so the holes line up.
 
 **Mount parts**
 
 | Part | Pick | Price | Notes |
 |---|---|---|---|
-| Antenna | [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html), 5.5 dBi, SO-239 | ~$116 | Pre-tuned 462–468 MHz. The Tram 1486 (~$100) has more gain but is wide-band "tunable" and needs an SWR meter. Confirm the CA-GMRS clamp fits a 1.5" mast. |
-| Wall brackets | [Easy Up EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) pair | est. $30–60 | 12-ga galvanized, third brace leg; fits 1"–1.75" mast (1.25"–1.5" ideal). Heavier alternative: [Rohn WM18D](https://www.solidsignal.com/rohn-pair-of-18-wall-mounts-for-tv-radio-and-cellular-antennas-wm18d) (up to 2¾"; holes spaced for 24" wood studs). |
-| Mast | 10 ft galvanized steel, 1.5" OD, 16-ga or heavier | est. $40–70 | Avoid thin swaged TV masts. |
+| Antenna | [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html), 5.5 dBi, SO-239 | ~$116 | Pre-tuned 462–468 MHz. Its length sets the mast cut. Confirm its clamp fits 1.66" OD. Alternative: Tram 1486 (~$100, needs SWR tuning). |
+| Mast | 1-1/4" schedule 40 galvanized steel pipe (1.66" OD), one 21 ft stick, cut to 25 ft − antenna length | est. $60–120 | Heavier option: 1-1/2" sch 40 (1.90" OD) with Rohn WM18D brackets. |
+| Base | Mast base plate + anchor bolts, or a pipe sleeve; ~3–4 bags concrete mix | est. $50–120 | Pad ~2 ft × 2 ft × 2 ft+ (below frost line). |
+| Wall brackets | [Easy Up EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) pair | est. $30–60 | Steadying only. Alternative: [Rohn WM18D](https://www.solidsignal.com/rohn-pair-of-18-wall-mounts-for-tv-radio-and-cellular-antennas-wm18d). |
+| Mounting plates | 2 pairs (inside + outside) of 3/16"–1/4" steel plates, ~8" × 12", drilled to match; steel rib spacers | est. $30–80 (fab shop) | One pair per bracket. |
+| Bolts | 3/8" hot-dip galvanized grade 5 bolts, washers, lock nuts, EPDM-bonded washers, butyl tape | est. $20–40 | At least 4 per bracket. |
 | Main coax | LMR-400 or equivalent, **PL-259 both ends**, measured run + ~10% | est. $70–120 (50 ft) | CA-GMRS and RT97S both have SO-239 sockets. Over ~75 ft → ½" hardline. |
 | Protection | UHF arrestor, 3 ft jumper, ground rod, #6 copper, clamps | est. $80–160 | |
-| Sealing | Self-amalgamating tape, butyl/EPDM washers, UV zip ties | est. $15 | |
-| Mounting plates | 2 pairs (inside + outside) of 3/16"–1/4" steel plates, ~12" × 18", drilled to match; steel rib spacers | est. $40–100 (fab shop) | One pair per bracket. |
-| Bolts | 3/8" hot-dip galvanized grade 5 bolts, flat washers, lock nuts, EPDM-bonded washers, butyl tape | est. $20–40 | At least 4 per bracket. |
-| *Optional* ground base | Mast base plate on a concrete pad, or a pipe set in concrete; extra 10 ft mast section | est. $50–120 | For the ground-supported option. |
+| Sealing | Self-amalgamating tape, UV zip ties / stainless straps | est. $15 | |
 
-**Mount subtotal: ~$400–670** with plates and bolts (add the optional ground base if used).
+**Mount subtotal: ~$470–830.**
 
 ### Height rules
 Check the GMRS antenna-height rule in 47 CFR Part 95E and any FAA / local / HOA limits before going much higher than the shop mast. Both options above are modest heights.
@@ -244,7 +274,7 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 | 4 | Jumper | 3 ft LMR-240 / RG-8X | est. $15–25 | Arrestor → repeater. |
 | 5 | Lightning arrestor | UHF-rated coax protector (PolyPhaser, Alpha Delta class) | est. $40–90 | At building entry, bonded to ground. |
 | 6 | Grounding | 8–10 ft ground rod, #6 copper, clamps | est. $40–70 | Bond to electrical service ground — have an electrician check. |
-| 7 | Mounting | Site A: rope, pulley, throw line. Site B: [EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) brackets + 10 ft 1.5" steel mast (§4.1) | est. $20–130 | |
+| 7 | Mounting | Site A: rope, pulley, throw line. Site B: [EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) steadying brackets + 21 ft 1-1/4" sch 40 pipe mast on a concrete base (§4.1) | est. $20–300 | |
 | 8 | Weatherproofing | Self-amalgamating tape + electrical tape, UV zip ties | est. $15 | |
 | 9 | Power | 13.8 V supply (in bundle) + optional battery backup | $0–150 est. | |
 | 10 | Controller interface | [DMK URIxB](https://reach.dog/shop/mygmrscom/products/dmk-engineering-urixb) | $119.95 | |
@@ -252,7 +282,7 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 | 12 | Controller PC | Existing Mac mini / Linux PC + small UPS | $0 + est. $60–100 | Set "power on after power loss" in BIOS/settings. |
 | 13 | License | FCC GMRS license | $35 / 10 yrs | Required. |
 
-**Rough totals:** tree-dipole starter ≈ **$700–900**; shop-mast station ≈ **$850–1,250** (both including controller parts, excluding the PC you already own).
+**Rough totals:** tree-dipole starter ≈ **$700–900**; shop ground-mast station ≈ **$1,000–1,500** (both including controller parts, excluding the PC you already own).
 
 ---
 
@@ -282,13 +312,13 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
   - Watchdog: if the controller stops responding, transmitter drops.
 
 ### R4 — Permanent site (optional)
-- Install the Comet CA-GMRS on the shop gable-end wall mount (§4.1), arrestor and grounding, battery backup.
+- Pour the mast base, raise the ground-supported mast with the Comet CA-GMRS at the shop gable end (§4.1), arrestor and grounding, battery backup.
 
 ---
 
 ## 7. Open questions
 - Shop wall panel gauge and rib profile (sets backing-plate size and spacer blocks). Decision so far: through-bolt with backing plates, not into internal beams.
-- Wall-only mount or ground-supported mast?
+- Exact Comet CA-GMRS length (sets the mast cut: 25 ft − antenna length) and local frost depth (sets pad depth).
 - Coax run length from the gable end to the repeater's spot inside (sets cable length and type).
 - Does the Comet CA-GMRS mount clamp fit a 1.5" OD mast?
 - Does the RT97L's DB-9 port support an external controller? (Decides the upgrade path.)
