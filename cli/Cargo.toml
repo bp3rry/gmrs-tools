@@ -1,0 +1,16 @@
+[package]
+name = "gmrs-cli"
+description = "The `gmrs` command-line tool."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "gmrs"
+path = "src/main.rs"
+
+[dependencies]
+gmrs-core = { path = "../core" }
+# The only external dependency: cross-platform USB-serial access.
+# Default features off to avoid pulling in libudev on Linux.
+serialport = { version = "4.10", default-features = false }

@@ -1,0 +1,9 @@
+[package]
+name = "gmrs-core"
+description = "Radio protocols, codeplug model and rules. No external dependencies by design."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+# Intentionally empty. See docs/ARCHITECTURE.md, rule 6.
