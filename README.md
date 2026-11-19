@@ -117,7 +117,7 @@ Add a GMRS repeater (proposed: **Retevis RT97S**) and run it from a repurposed M
 - **R1** Read-only programming: `gmrs` backup/show for the RT97S (after Phase 1 is proven on real hardware).
 - **R2** Write settings with verification; repeater rules (462/467 MHz pairs, power, station ID).
 - **R3** Controller: prove wiring with SVXLink, then build `gmrs-controller` (ID, timeout, courtesy tone, logging) with hard PTT safety limits.
-- **R4** Permanent site on the shop (~25–30 ft mast), grounding and battery backup.
+- **R4** Permanent site: Comet CA-GMRS on a 10 ft mast, gable-end wall mount on the metal shop (~22–25 ft), grounding and battery backup.
 
 ### Later / ideas
 - Additional radios (UV-5G, other Baofeng/BTECH models, Quansheng UV-K5).

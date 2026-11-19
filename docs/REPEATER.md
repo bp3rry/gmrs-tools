@@ -20,11 +20,11 @@ Out of scope for now: internet linking (GMRS restricts network interconnection; 
 
 | Role | Choice | Why |
 |---|---|---|
-| Repeater | **Retevis RT97S** | Cheapest of the line (~$340), FCC Part 95E listed (FCC ID 2ASNSRT97 — verify on fcc.gov), built-in duplexer (one antenna), and has the **DB-9 controller port** with a known-working URIxB cable. |
+| Repeater | **Retevis RT97S** (GMRS version — not the "Customizable" frequency version) | Cheapest of the line (~$340), FCC Part 95E listed (FCC ID 2ASNSRT97 — verify on fcc.gov), built-in duplexer (one antenna), and has the **DB-9 controller port** with a known-working URIxB cable. Amazon listing [B0CTKHTCWR](https://www.amazon.com/dp/B0CTKHTCWR) is this model. |
 | Controller interface | **DMK URIxB** (~$120) + RT97S-to-URIxB cable | USB sound card with PTT output and COS (carrier detect) input. |
 | Controller computer | Existing Mac mini or Linux PC, **running Debian** | Headless, auto-restart services, no macOS sleep/update surprises. |
 | Antenna (initial) | Vertical UHF dipole or J-pole hoisted in a tree | Cheap, quick, ~20 ft. See §4. |
-| Antenna (permanent) | Fiberglass base antenna (e.g. Tram 1486) on a mast at the shop | See §4. |
+| Antenna (permanent) | **Comet CA-GMRS** on a 10 ft mast, gable-end wall mount on the shop | Factory-tuned for 462–468 MHz, no adjustment needed. See §4.1. |
 
 Upgrade path: **RT97L** (~$535, ~20 W measured vs ~4 W) if coverage is too small — but confirm its DB-9 port supports a controller first.
 
@@ -37,7 +37,7 @@ Upgrade path: **RT97L** (~$535, ~20 W measured vs ~4 W) if coverage is too small
 ```
                  ┌─────────────────────┐
                  │   ANTENNA           │   tree dipole (~20 ft)  — or —
-                 │   (vertical, UHF)   │   shop mast (~25–30 ft)
+                 │   (vertical, UHF)   │   Comet CA-GMRS, shop wall mast (~22–25 ft)
                  └──────────┬──────────┘
                             │  LMR-400 coax (drip loop before entry)
                             │
@@ -121,9 +121,9 @@ Two candidate sites. Either works; **start with the tree, move to the shop** onc
 
 | | A. Tree at garage corner | B. Shop (30×40, ~15 ft peak) |
 |---|---|---|
-| Antenna height | ~20 ft | ~25–30 ft (gable-end mast, 10–15 ft above peak) |
-| Antenna | Vertical dipole / roll-up J-pole hung from a rope + pulley | Fiberglass base antenna (Tram 1486 class) on mast |
-| Cost | Low (~$30–80 antenna + rope) | Higher (mast, brackets, ~$60–200 extra) |
+| Antenna height | ~20 ft | ~22–25 ft (10 ft mast on gable-end wall brackets) |
+| Antenna | Vertical dipole / roll-up J-pole hung from a rope + pulley | Comet CA-GMRS on 1.5" steel mast |
+| Cost | Low (~$30–80 antenna + rope) | ~$340–530 for antenna, mount, coax and grounding (§4.1) |
 | Effort | An afternoon | A weekend; ladder/roof work |
 | Durability | Wind sway, branches, re-hoisting | Permanent |
 | Best for | Bench-to-field testing, first coverage check | Long-term station |
@@ -134,10 +134,66 @@ Two candidate sites. Either works; **start with the tree, move to the shop** onc
 - **Use a halyard (rope + pulley)** so you can lower it without climbing. Leave slack for sway so the coax isn't tugged.
 - **Measure the coax run** from the antenna to where the repeater will sit. At 462 MHz, 50 ft of LMR-400 loses about 1.4 dB; the same length of RG-58 loses roughly 5 dB (most of your signal).
 
-### Shop mast tips
-- A **gable-end wall bracket pair** holding a 10–20 ft mast is simpler than a roof penetration.
-- If the shop has a **metal roof/siding**, that's fine — just keep the antenna's radiating section well above the roofline (several feet), and put the repeater inside with only the coax passing through.
-- The shop is also a good home for the repeater, power and controller PC (shorter coax run, one grounding point).
+### 4.1 Shop gable-end wall mount (recommended permanent site)
+
+Side view of the gable end of the 30×40 metal shop:
+
+```
+                    ┌┐
+                    ││  Comet CA-GMRS antenna
+                    ││  (keep within ~5 ft of the top bracket)
+                    └┤
+                     │
+                     │  10 ft galvanized steel mast, 1.5" OD, 16-ga or heavier
+                     │◄─── coax strapped down the mast every ~2 ft
+        roof peak    │
+          ~15 ft  /\ │
+                 /  \╞══╗  UPPER bracket — high on the gable,
+                /    \  ║  bolted into framing (not just sheet metal)
+               /      \ ║
+              /        \║◄── 18" standoff clears roof overhang/trim
+             /          ║    and keeps the antenna off the metal wall
+            /           ║
+           /            ║
+   eave ──/─────────── ╞╝  LOWER bracket (+ brace leg) near the eave
+         │              │
+         │   metal wall │ ◄── butyl/EPDM sealing washers on every bolt
+         │   (girts     │
+         │   behind)    │       drip loop
+         │              │        ╭─╮
+         │       ┌──────┴──◄─────╯ │   coax enters wall below the loop
+         │       │ ARRESTOR├───────┘
+         │       └────┬────┘
+         │  inside    │ #6 copper ───► GROUND ROD (8–10 ft) ◄─── mast bonded here too
+         │            │ 3 ft jumper
+         │       ┌────▼─────┐
+         │       │  RT97S   │  + power supply, controller PC
+         │       └──────────┘
+   ──────┴──────────────────────────── ground
+```
+
+**How it's built**
+- **Bolt into the framing, never just the siding.** Find the horizontal girts behind the panels.
+  - *Wood girts* (typical pole barn): ⅜" lag bolts into the girts.
+  - *Steel girts:* through-bolt with a backing plate, or self-drilling structural screws rated for the steel thickness.
+- **Spread the brackets as far apart vertically as possible:** lower one near the eave, upper one high on the gable. Less mast above the top bracket handles wind better. If the antenna would sit more than ~5 ft above the top bracket, use a heavier mast.
+- **18" standoff brackets** clear the overhang and keep the antenna away from the metal wall, which can distort its pattern.
+- **Coax runs down the mast,** strapped every ~2 ft, with a drip loop before it enters the wall.
+- **Arrestor at the wall entry**, bonded with the mast to one ground rod, which is bonded to the electrical service ground.
+- The shop is also a good home for the repeater, power and controller PC: short coax run and one grounding point.
+
+**Mount parts**
+
+| Part | Pick | Price | Notes |
+|---|---|---|---|
+| Antenna | [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html), 5.5 dBi, SO-239 | ~$116 | Pre-tuned 462–468 MHz. The Tram 1486 (~$100) has more gain but is wide-band "tunable" and needs an SWR meter. Confirm the CA-GMRS clamp fits a 1.5" mast. |
+| Wall brackets | [Easy Up EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) pair | est. $30–60 | 12-ga galvanized, third brace leg; fits 1"–1.75" mast (1.25"–1.5" ideal). Heavier alternative: [Rohn WM18D](https://www.solidsignal.com/rohn-pair-of-18-wall-mounts-for-tv-radio-and-cellular-antennas-wm18d) (up to 2¾"; holes spaced for 24" wood studs). |
+| Mast | 10 ft galvanized steel, 1.5" OD, 16-ga or heavier | est. $40–70 | Avoid thin swaged TV masts. |
+| Main coax | LMR-400 or equivalent, **PL-259 both ends**, measured run + ~10% | est. $70–120 (50 ft) | CA-GMRS and RT97S both have SO-239 sockets. Over ~75 ft → ½" hardline. |
+| Protection | UHF arrestor, 3 ft jumper, ground rod, #6 copper, clamps | est. $80–160 | |
+| Sealing | Self-amalgamating tape, butyl/EPDM washers, UV zip ties | est. $15 | |
+
+**Mount subtotal: ~$340–530.**
 
 ### Height rules
 Check the GMRS antenna-height rule in 47 CFR Part 95E and any FAA / local / HOA limits before going much higher than the shop mast. Both options above are modest heights.
@@ -150,14 +206,14 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 
 | # | Item | Suggested | Price | Notes |
 |---|---|---|---|---|
-| 1 | Repeater | [Retevis RT97S](https://www.retevis.com/products/rt97s-full-duplex-portable-gmrs-repeater) or [myGMRS bundle](https://shop.mygmrs.com/products/retevis-rt97s-repeater-bundle-with-antenna-and-coax-cable) | $339.99 | Bundle adds AC supply, programming cable, small antenna, RG-58 (use only for bench tests). |
+| 1 | Repeater | [Retevis RT97S](https://www.retevis.com/products/rt97s-full-duplex-portable-gmrs-repeater), [Amazon B0CTKHTCWR](https://www.amazon.com/dp/B0CTKHTCWR), or [myGMRS bundle](https://shop.mygmrs.com/products/retevis-rt97s-repeater-bundle-with-antenna-and-coax-cable) | $339.99 (Retevis) | Choose the GMRS version. Antenna and controller cable are never included; check each listing for AC supply + programming cable. Bundle's RG-58 is for bench tests only. |
 | 2a | Antenna — tree | Vertical UHF dipole or roll-up J-pole (GMRS-tuned) | est. $30–80 | Site A. |
-| 2b | Antenna — shop | [Tram 1486](https://reach.dog/shop/mygmrscom/products/tram-1486-uhf-fiberglass-base-antenna) | ~$94–110 | Site B. Upgrades: [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html) (~$116), [Comet CA-712EFC](https://www.gigaparts.com/comet-ca-712efc-460-470mhz-base-repeater-antenna.html) (~$160–223). |
+| 2b | Antenna — shop | [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html) | ~$116 | Site B, pre-tuned. Alternatives: [Tram 1486](https://reach.dog/shop/mygmrscom/products/tram-1486-uhf-fiberglass-base-antenna) (~$94–110, needs tuning), [Comet CA-712EFC](https://www.gigaparts.com/comet-ca-712efc-460-470mhz-base-repeater-antenna.html) (~$160–223). |
 | 3 | Feedline | LMR-400 (or equivalent), PL-259 ends, cut to length | est. $1–2/ft | Over ~75 ft, consider ½" hardline. |
 | 4 | Jumper | 3 ft LMR-240 / RG-8X | est. $15–25 | Arrestor → repeater. |
 | 5 | Lightning arrestor | UHF-rated coax protector (PolyPhaser, Alpha Delta class) | est. $40–90 | At building entry, bonded to ground. |
 | 6 | Grounding | 8–10 ft ground rod, #6 copper, clamps | est. $40–70 | Bond to electrical service ground — have an electrician check. |
-| 7 | Mounting | Site A: rope, pulley, throw line. Site B: gable brackets + 10–20 ft mast | est. $20–200 | |
+| 7 | Mounting | Site A: rope, pulley, throw line. Site B: [EZ30-18](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) brackets + 10 ft 1.5" steel mast (§4.1) | est. $20–130 | |
 | 8 | Weatherproofing | Self-amalgamating tape + electrical tape, UV zip ties | est. $15 | |
 | 9 | Power | 13.8 V supply (in bundle) + optional battery backup | $0–150 est. | |
 | 10 | Controller interface | [DMK URIxB](https://reach.dog/shop/mygmrscom/products/dmk-engineering-urixb) | $119.95 | |
@@ -195,11 +251,14 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
   - Watchdog: if the controller stops responding, transmitter drops.
 
 ### R4 — Permanent site (optional)
-- Move antenna to the shop mast, proper grounding/arrestor, battery backup.
+- Install the Comet CA-GMRS on the shop gable-end wall mount (§4.1), arrestor and grounding, battery backup.
 
 ---
 
 ## 7. Open questions
+- Shop wall girts: wood or steel? (Decides lag bolts vs through-bolts/structural screws.)
+- Coax run length from the gable end to the repeater's spot inside (sets cable length and type).
+- Does the Comet CA-GMRS mount clamp fit a 1.5" OD mast?
 - Does the RT97L's DB-9 port support an external controller? (Decides the upgrade path.)
 - Exact GMRS station-ID and remote-control requirements for repeaters (Part 95E).
 - Retevis programming protocol — unknown until traced.
@@ -209,5 +268,7 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 - [Retevis RT97S](https://www.retevis.com/products/rt97s-full-duplex-portable-gmrs-repeater) · [RT97S vs RT97L](https://www.retevis.com/blog/rt97s-vs-rt97l-which-gmrs-repeater-is-right-for-you-) · [RT97L test](https://www.retevis.com/blog/retevis-rt97l-repeater-review-real-world-testing-for-gmrs-enthusiasts)
 - [Repeater Builder: RIM Lite to RT97S pinout (PDF)](https://www.repeater-builder.com/products/RIM_pdfs/RB_RIM_Lite_to_RT97S.pdf)
 - [myGMRS RT97S-to-URIxB cable](https://shop.mygmrs.com/products/retevis-rt97s-to-dmk-urixb-custom-interface-cable) · [DMK URIxB](https://reach.dog/shop/mygmrscom/products/dmk-engineering-urixb)
+- [RT97S manual (Amazon ASIN B0CTKHTCWR)](https://manuals.plus/asin/B0CTKHTCWR)
+- [Comet CA-GMRS](https://www.buytwowayradios.com/comet-ca-gmrs.html) · [Easy Up EZ30-18 brackets](https://www.solidsignal.com/easy-up-deluxe-18-inch-y-type-antenna-wall-mount-brace-pair-ez30-18) · [Rohn WM18D brackets](https://www.solidsignal.com/rohn-pair-of-18-wall-mounts-for-tv-radio-and-cellular-antennas-wm18d)
 - [RT97/RT97S USB driver notes](https://shop.mygmrs.com/pages/retevis-rt97-and-rt97s-usb-driver-installation)
 - [FCC GMRS rules (47 CFR Part 95 Subpart E)](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-D/part-95/subpart-E)
