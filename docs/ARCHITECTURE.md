@@ -219,7 +219,9 @@ GMRS/
 ├── README.md
 ├── docs/
 │   ├── ARCHITECTURE.md        ◄── this file
+│   ├── REPEATER.md            Phase R plan, station diagram, parts list
 │   ├── protocol/uv5r.md       clean-room protocol + memory map
+│   ├── protocol/rt97.md       Retevis RT97S protocol (Phase R)
 │   ├── rules/gmrs.md          GMRS reference (human-readable)
 │   └── learn/                 lessons
 ├── data/
@@ -227,6 +229,7 @@ GMRS/
 │   └── radios/uv5r.json       radio capabilities + certification
 ├── core/                      Rust library (drivers, codeplug, rules, transport)
 ├── cli/                       `gmrs` command-line tool
+├── controller/                `gmrs-controller` repeater service (Phase R3)
 ├── desktop/                   Tauri 2 app (Phase 3)
 ├── mobile/
 │   ├── android/               (Phase 4)
@@ -247,3 +250,4 @@ GMRS/
 | 2026-11-19 | iOS uses BLE bridge | iOS does not permit generic USB-serial access. |
 | 2026-11-19 | Minimal dependencies; no `clap` | Owner asked for minimal dependencies. Core: none. CLI: `serialport` only (default features off). |
 | 2026-11-19 | Python allowed for utilities only | Owner is fine with Python scripts for tooling; product stays Rust. |
+| 2026-11-19 | **Proposed:** Phase R repeater track (Retevis RT97S + URIxB controller) | See [REPEATER.md](REPEATER.md). Controller logic lives in `core` as a hardware-free state machine; a separate `controller/` program does audio/GPIO. That program would need `hidapi` (GPIO) and `cpal` (audio). Those dependencies are **pending approval** in R3. `core` stays at zero dependencies. |

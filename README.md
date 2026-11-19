@@ -111,6 +111,14 @@ See **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** for the full architecture, 
 - iOS does not allow generic USB-serial access, so programming requires a **Bluetooth LE serial bridge** to the radio's K1 port (DIY or commercial).
 - Reuse the core via Swift bindings.
 
+### Phase R — Repeater station (parallel track)
+Add a GMRS repeater (proposed: **Retevis RT97S**) and run it from a repurposed Mac mini / Linux PC. Full plan, system diagram, antenna site options and parts list: **[docs/REPEATER.md](docs/REPEATER.md)**.
+- **R0** Research & bench setup: buy hardware, trace the Retevis programming protocol, verify the controller-port pinout, put up a tree-mounted dipole (~20 ft).
+- **R1** Read-only programming: `gmrs` backup/show for the RT97S (after Phase 1 is proven on real hardware).
+- **R2** Write settings with verification; repeater rules (462/467 MHz pairs, power, station ID).
+- **R3** Controller: prove wiring with SVXLink, then build `gmrs-controller` (ID, timeout, courtesy tone, logging) with hard PTT safety limits.
+- **R4** Permanent site on the shop (~25–30 ft mast), grounding and battery backup.
+
 ### Later / ideas
 - Additional radios (UV-5G, other Baofeng/BTECH models, Quansheng UV-K5).
 - Repeater directory import (subject to each directory's terms of use).
