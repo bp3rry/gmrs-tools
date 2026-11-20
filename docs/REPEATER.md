@@ -256,6 +256,71 @@ Bracket attachment detail (cross-section through the wall, one bracket):
 
 **Mount subtotal: ~$470–830.**
 
+### 4.2 Alternative: DIY two-piece mast (conduit/pipe base + manufactured top mast)
+
+Same base, brackets, heights and antenna as §4.1. Only the mast changes. It's built in two pieces:
+
+- **Lower section (DIY):** about 15 ft of galvanized conduit or pipe, from the concrete base to just above the upper bracket. Both wall brackets clamp this piece, so it is braced along its whole length.
+- **Upper section (manufactured):** a 10 ft heavy-wall antenna mast that **slides down inside** the lower section, overlapping about 3 ft, and is through-bolted. This piece holds the antenna above the roof, where the wind load is.
+
+```
+                  ┌┐ ◄── antenna tip ≈ 25 ft
+                  └┤
+                   │  UPPER: manufactured antenna mast,
+                   │  1-1/4" OD heavy-wall (16-ga or heavier), 10 ft
+                   │  ~7 ft exposed above the joint
+                   │
+       ┌───────────┼───────────┐ ◄── top of lower section ≈ 15 ft
+       │  ┌─────┐  │  ║        │     (cap gap with sealant / boot)
+       │  │bolt ├──┼──╫──┐     │
+       │  └─────┘  │  ║  │     │     JOINT DETAIL
+  peak │           │  ║  │ 3 ft│     • upper mast slides inside lower pipe
+ ~15 ft│ ══════════╪══╬══╪═══  │ ◄── UPPER bracket (~14 ft) clamps the
+       │           │  ║  │     │     lower pipe right at the overlap
+       │  ┌─────┐  │  ║  │     │     • 2 through-bolts, 3/8" galvanized,
+       │  │bolt ├──┼──╫──┘     │       ~2.5 ft apart, at 90° to each other
+       │  └─────┘  │  ║        │     • shim any slop with galvanized sheet
+       └───────────┼──╨────────┘       so it doesn't rattle
+                   │  ▲ bottom of upper mast ≈ 12 ft
+                   │
+                   │  LOWER: DIY galvanized conduit/pipe, ~15 ft,
+                   │  ID must fit the upper mast's OD snugly
+     ══════════════╪══════  LOWER bracket (~7–10 ft; place it over any coupling)
+                   │
+                   │  ◄── 1/4" drain hole just above the base plate
+                ┌──┴──┐
+                │ PAD │  concrete base + base plate, ground rod
+                └─────┘
+```
+
+**Choosing the two pieces (they must nest)**
+
+| Lower section | OD / ID | Upper mast that fits inside | Notes |
+|---|---|---|---|
+| **1-1/2" EMT** (galvanized thin-wall conduit) | 1.74" / ~1.61" | 1-1/4" OD (or 1-1/2" OD if it measures ≤1.60") | Cheapest and lightest. **Only acceptable because both brackets brace it.** Never let EMT stick out above the top bracket. The 1.74" OD just fits EZ30-18 brackets (max 1.75"). |
+| **1-1/2" rigid conduit (RMC)** or **1-1/2" schedule 40 pipe** | 1.90" / ~1.61" | 1-1/4" OD (or 1-1/2" OD if it measures ≤1.60") | Much stronger. Threaded couplings are sturdy. The 1.90" OD needs Rohn WM18D brackets. |
+
+Nominal pipe and mast sizes aren't actual measurements. **Measure the upper mast's OD and the lower pipe's ID with calipers before buying both.** A sliding fit with less than ~1/16" of slop is ideal; shim anything looser.
+
+**Build notes**
+- **Lengths:** conduit comes in 10 ft sticks, so a 15 ft lower section needs a coupling. Put the coupling at the lower bracket so the bracket supports it. Threaded RMC couplings are better than EMT set-screw couplings, and for EMT use compression couplings, not set-screw ones.
+- **Raising it in stages:** raise the lower section and clamp it into both brackets first. It's a short, light, one-or-two-person job. Then, from a ladder at the peak, lower the upper mast with the antenna and coax attached into the socket and bolt it. That's easier and safer than standing a 21 ft one-piece mast.
+- **Grounding:** couplings and the bolted joint aren't reliable electrical paths, so run a #6 copper bonding wire from the upper mast, across the joint and couplings, to the ground rod.
+- **Water:** seal the top of the joint (sealant or a rubber boot) and drill a 1/4" drain hole just above the base plate so the pipe can't fill with water and freeze.
+- **Don't use PVC conduit.** It's too flexible and can't be grounded.
+
+**Cost compared with §4.1**
+
+| Mast option | Est. cost | Comment |
+|---|---|---|
+| §4.1 one 21 ft stick, 1-1/4" sch 40 pipe | $60–120 | One piece, but awkward to haul and raise. |
+| §4.2 two 10 ft sticks of 1-1/2" EMT + coupling + 10 ft heavy-wall mast | $70–130 | Similar cost, much easier to haul and raise in stages. |
+| §4.2 with 1-1/2" RMC/sch 40 lower + 10 ft mast | $90–170 | Strongest; Rohn WM18D brackets. |
+
+The money saving is small; most of the mount cost is the antenna, coax and grounding. The real gains are **handling and safety**: everything fits in a pickup, and nothing longer than 10 ft has to be raised. Use any pipe or conduit you already have, provided it meets the fit and strength notes above, and the saving gets bigger.
+
+All prices in this table are estimates, not from listings.
+
 ### Height rules
 Check the GMRS antenna-height rule in 47 CFR Part 95E and any FAA / local / HOA limits before going much higher than the shop mast. Both options above are modest heights.
 
@@ -318,6 +383,7 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 
 ## 7. Open questions
 - Shop wall panel gauge and rib profile (sets backing-plate size and spacer blocks). Decision so far: through-bolt with backing plates, not into internal beams.
+- Mast build: one-piece pipe (§4.1) or DIY two-piece (§4.2)? If §4.2, caliper-check that the upper mast nests in the lower pipe.
 - Exact Comet CA-GMRS length (sets the mast cut: 25 ft − antenna length) and local frost depth (sets pad depth).
 - Coax run length from the gable end to the repeater's spot inside (sets cable length and type).
 - Does the Comet CA-GMRS mount clamp fit a 1.5" OD mast?
