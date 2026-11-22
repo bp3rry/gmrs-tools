@@ -356,6 +356,7 @@ Prices are from listings found 2026-11-19; **est.** = estimate, not from a speci
 ### R0 — Research & bench setup
 - Buy RT97S + license; bench-test with the bundled antenna.
 - Capture serial traces of the Retevis programming software (needs a Windows machine) → `docs/protocol/rt97.md`, clean-room.
+- **Programming cable:** use the Retevis RT97/RT97S USB programming cable (normally in the box). **Do not use a generic USB-to-RS-232 DB-9 adapter.** The repeater's DB-9 is a Retevis mic/programming port, almost certainly logic-level (TTL) serial, not RS-232. RS-232's ±12 V levels can damage it. Record which chip the cable uses (CH340, or the newer "USB READER" version) and whether macOS sees it.
 - Verify the DB-9 controller-port pinout on our unit (COS pin 3 / PTT pin 9, both active-low per Repeater Builder) and that the repeater keeps repeating with a controller attached.
 - Confirm FCC certification on fcc.gov; read Part 95E sections on repeaters, station ID, remote control, interconnection.
 - Put up the tree antenna; do a drive-around coverage check.
